@@ -27,21 +27,21 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/resources/views', 'sdisauth');
 
-        // $this->publishes([
-        //     __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
-        // ], 'sdisauth');
+        $this->publishes([
+            __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
+        ], 'sdisauth');
 
-        // $this->publishes([
-        //     __DIR__.'/database/seeders' => database_path('seeders'),
-        // ], 'sdisauth');
+        $this->publishes([
+            __DIR__.'/database/seeders' => database_path('seeders'),
+        ], 'sdisauth');
 
-        // $this->publishes([
-        //     __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
-        // ], 'config');
+        $this->publishes([
+            __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
+        ], 'config');
 
-        // $this->publishes([
-        //     __DIR__.'/public' => public_path('vendor/sdisauth'),
-        // ], 'sdisauth-assets');
+        $this->publishes([
+            __DIR__.'/public' => public_path('vendor/sdisauth'),
+        ], 'sdisauth-assets');
         
     }
 
