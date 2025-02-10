@@ -32,9 +32,9 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
         ], 'sdisauth');
 
-        $this->publishes([
-            __DIR__.'/database/seeders' => database_path('seeders'),
-        ], 'sdisauth');
+        // $this->publishes([
+        //     __DIR__.'/database/seeders' => database_path('seeders'),
+        // ], 'sdisauth');
 
         // Publication des migrations | jE NE PUBLIE PAS LES MIGRATIONS 
         //POUR LE MOMENT POUR EVITER LES CONFICT AVEC CEUX DE PERMISSION
@@ -54,6 +54,9 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/routes/web' => base_path('routes/vendor/sdisauth/web'),
         ], 'sdisauth-routes');
         
+        $this->publishes([
+            __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
+        ], 'sdisauth-controllers');
         
     }
 

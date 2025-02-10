@@ -60,6 +60,15 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des vues...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
+        }
+
+        if ($this->confirm('Souhaitez-vous publier les controlleurs ?')) {
+            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+            $this->info('+++++++++++++++++++Publication des controlleurs...+++++++++++++++');
+            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+            $this->call('vendor:publish', ['--tag' => 'sdisauth-controllers']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
         }
 
         if ($this->confirm('Souhaitez-vous publier les migrations ?')) {
@@ -67,20 +76,23 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des migrations...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth-migrations']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
         }
 
-        if ($this->confirm('Souhaitez-vous publier les seeders ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des seeders...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth-seeders']);
-        }
+        // if ($this->confirm('Souhaitez-vous publier les seeders ?')) {
+        //     $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        //     $this->info('+++++++++++++++++++Publication des seeders...+++++++++++++++');
+        //     $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        //     $this->call('vendor:publish', ['--tag' => 'sdisauth-seeders']);
+        //     $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
+        // }
 
         if ($this->confirm('Souhaitez-vous publier la configuration ?')) {
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->info('+++++++++++++++++++Publication de la configuration...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'config']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
         }
 
         if ($this->confirm('Souhaitez-vous publier les assets ?')) {
@@ -88,6 +100,7 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des assets...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth-assets']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
         }
 
         if ($this->confirm('Souhaitez-vous publier les routes ?')) {
@@ -95,9 +108,10 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des routes...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth-routes']);
+            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
             exec('php artisan migrate', $output, $status);
             if ($status === 0) {
-                $this->info('Migration effectuée avec succès.');
+                $this->info('Migration effectuée avec succès✅✅.');
             } else {
                 $this->error('Erreur lors de l\'exécution de la migration.');
             }
