@@ -18,8 +18,19 @@ class InstallAuthPackageCommand extends Command
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->info('+++++++++++++++++++Installation de Laravel Breeze +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('composer require laravel/breeze');
-            $this->call('breeze:install', ['stack' => 'blade']);
+            exec('composer require laravel/breeze --dev', $output, $status);
+            if ($status === 0) {
+                $this->info('Laravel Breeze installé avec succès.');
+            } else {
+                $this->error('Erreur lors de l\'installation de Laravel Breeze.');
+            }
+
+            exec('php artisan breeze:install --stack=blade', $output, $status);
+            if ($status === 0) {
+                $this->info('Laravel Breeze configuré avec succès.');
+            } else {
+                $this->error('Erreur lors de la configuration de Laravel Breeze.');
+            }
         }
 
         // Installer Laravel Permission
@@ -27,9 +38,27 @@ class InstallAuthPackageCommand extends Command
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->info('+++++++++++++++Installation de Laravel Permission +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('composer require spatie/laravel-permission');
-            $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
-            $this->call('migrate');
+            
+            exec('composer require spatie/laravel-permission', $output, $status);
+            if ($status === 0) {
+                $this->info('Spatie Laravel Permission installé avec succès.');
+            } else {
+                $this->error('Erreur lors de l\'installation de Spatie Laravel Permission.');
+            }
+
+            exec('php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"', $output, $status);
+            if ($status === 0) {
+                $this->info('Fichiers de configuration de Laravel Permission publiés avec succès.');
+            } else {
+                $this->error('Erreur lors de la publication des fichiers de Laravel Permission.');
+            }
+            exec('php artisan migrate', $output, $status);
+            if ($status === 0) {
+                $this->info('Migration effectuée avec succès.');
+            } else {
+                $this->error('Erreur lors de l\'exécution de la migration.');
+            }
+
         }
 
         if ($this->confirm('Souhaitez-vous publier les vues ?')) {
