@@ -10,11 +10,11 @@ class AuthServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        // $this->commands([
-        //     InstallAuthPackageCommand::class,
-        // ]);
+        $this->commands([
+            InstallAuthPackageCommand::class,
+        ]);
 
-        // $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     public function boot()
