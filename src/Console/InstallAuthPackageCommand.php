@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InstallAuthPackageCommand extends Command
 {
-    protected $signature = 'sdisauth::install';
+    protected $signature = 'sdisauth:install';
     protected $description = 'Installe Laravel Breeze et configure Laravel Permission';
 
     public function handle()
