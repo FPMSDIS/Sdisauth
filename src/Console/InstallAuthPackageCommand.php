@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InstallAuthPackageCommand extends Command
 {
-    protected $signature = 'sdisauth:install';
+    protected $signature = 'sdisauth::install';
     protected $description = 'Installe Laravel Breeze et configure Laravel Permission';
 
     public function handle()
@@ -20,7 +20,7 @@ class InstallAuthPackageCommand extends Command
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
             // Installation de Breeze via composer
-            $this->call('composer', ['require', 'laravel/breeze', '--dev']);
+            $this->runCommand('composer require laravel/breeze --dev');
             $this->info('Laravel Breeze installé avec succès.');
 
             // Installation de Breeze
@@ -34,7 +34,7 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++ Installation de Laravel Permission +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
-            $this->call('composer', ['require', 'spatie/laravel-permission']);
+            $this->runCommand('composer require spatie/laravel-permission');
             $this->info('Spatie Laravel Permission installé avec succès.');
 
             $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
