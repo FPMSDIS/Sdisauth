@@ -18,7 +18,7 @@ class InstallAuthPackageCommand extends Command
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->info('+++++++++++++++++++Installation de Laravel Breeze +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('composer require laravel/breeze --dev');
+            $this->call('composer require laravel/breeze');
             $this->call('breeze:install', ['stack' => 'blade']);
         }
 
