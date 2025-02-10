@@ -5,6 +5,7 @@ namespace Sdisauth;
 use Sdisauth\Console\InstallAuthPackageCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class AuthServiceProvider extends ServiceProvider
 {
