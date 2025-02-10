@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
             InstallAuthPackageCommand::class,
         ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        // $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
     }
 
@@ -36,10 +36,11 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/database/seeders' => database_path('seeders'),
         ], 'sdisauth');
 
-        // Publication des migrations
-        $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'sdisauth-migrations');
+        // Publication des migrations | jE NE PUBLIE PAS LES MIGRATIONS 
+        //POUR LE MOMENT POUR EVITER LES CONFICT AVEC CEUX DE PERMISSION
+        // $this->publishes([
+        //     __DIR__.'/database/migrations' => database_path('migrations'),
+        // ], 'sdisauth-migrations');
 
         $this->publishes([
             __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),

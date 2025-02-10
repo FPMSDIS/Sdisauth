@@ -20,12 +20,12 @@ class InstallAuthPackageCommand extends Command
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             exec('composer require laravel/breeze --dev', $output, $status);
             if ($status === 0) {
-                $this->info('Laravel Breeze installé avec succès.');
+                $this->info('Laravel Breeze installé avec succès.');//ok
             } else {
                 $this->error('Erreur lors de l\'installation de Laravel Breeze.');
             }
 
-            exec('php artisan breeze:install --stack=blade', $output, $status);
+            exec('php artisan breeze:install', $output, $status);
             if ($status === 0) {
                 $this->info('Laravel Breeze configuré avec succès.');
             } else {
@@ -41,22 +41,16 @@ class InstallAuthPackageCommand extends Command
             
             exec('composer require spatie/laravel-permission', $output, $status);
             if ($status === 0) {
-                $this->info('Spatie Laravel Permission installé avec succès.');
+                $this->info('Spatie Laravel Permission installé avec succès.');//ok
             } else {
                 $this->error('Erreur lors de l\'installation de Spatie Laravel Permission.');
             }
 
             exec('php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"', $output, $status);
             if ($status === 0) {
-                $this->info('Fichiers de configuration de Laravel Permission publiés avec succès.');
+                $this->info('Fichiers de configuration de Laravel Permission publiés avec succès.');//ok
             } else {
                 $this->error('Erreur lors de la publication des fichiers de Laravel Permission.');
-            }
-            exec('php artisan migrate', $output, $status);
-            if ($status === 0) {
-                $this->info('Migration effectuée avec succès.');
-            } else {
-                $this->error('Erreur lors de l\'exécution de la migration.');
             }
 
         }
@@ -73,7 +67,6 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des migrations...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth-migrations']);
-            $this->call('migrate');
         }
 
         if ($this->confirm('Souhaitez-vous publier les seeders ?')) {
@@ -102,6 +95,12 @@ class InstallAuthPackageCommand extends Command
             $this->info('+++++++++++++++++++Publication des routes...+++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             $this->call('vendor:publish', ['--tag' => 'sdisauth-routes']);
+            exec('php artisan migrate', $output, $status);
+            if ($status === 0) {
+                $this->info('Migration effectuée avec succès.');
+            } else {
+                $this->error('Erreur lors de l\'exécution de la migration.');
+            }
         }
 
         $this->info('Installation terminée ✅🏆FPM DEV TEAM => SDIS🏆');
