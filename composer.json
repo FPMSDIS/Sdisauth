@@ -1,0 +1,35 @@
+{
+    "name": "fpmsdis/sdisauth",
+    "description": "Un package d'authentification basé sur Laravel Breeze et Laravel Permission",
+    "author": "",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sdisauth\\": "src/"
+        },
+        "files": [
+            "src/routes/userRolePermission.php"
+        ]
+    },
+    "require": {
+        "php": "^8.2",
+        "laravel/breeze": "^2.2",
+        "spatie/laravel-permission": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sdisauth\\AuthServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
+        ]
+    }
+}
