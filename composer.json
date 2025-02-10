@@ -8,10 +8,7 @@
     "autoload": {
         "psr-4": {
             "Sdisauth\\": "src/"
-        },
-        "files": [
-            "src/routes/userRolePermission.php"
-        ]
+        }
     },
     "require": {
         "php": "^8.2",
