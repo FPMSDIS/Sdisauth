@@ -11,112 +11,65 @@ class InstallAuthPackageCommand extends Command
 
     public function handle()
     {
-       
         $this->info('Début de l\'installation et de la publication des ressources pour Sdisauth.');
-        
+
+        // Installation de Laravel Breeze
         if ($this->confirm('Souhaitez-vous installer Laravel Breeze ?')) {
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Installation de Laravel Breeze +++++++++++++++');
+            $this->info('+++++++++++++++++++ Installation de Laravel Breeze +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            exec('composer require laravel/breeze --dev', $output, $status);
-            if ($status === 0) {
-                $this->info('Laravel Breeze installé avec succès.');//ok
-            } else {
-                $this->error('Erreur lors de l\'installation de Laravel Breeze.');
-            }
 
-            exec('php artisan breeze:install', $output, $status);
-            if ($status === 0) {
-                $this->info('Laravel Breeze configuré avec succès.');
-            } else {
-                $this->error('Erreur lors de la configuration de Laravel Breeze.');
-            }
+            // Installation de Breeze via composer
+            $this->call('composer', ['require', 'laravel/breeze', '--dev']);
+            $this->info('Laravel Breeze installé avec succès.');
+
+            // Installation de Breeze
+            $this->call('breeze:install', ['--force' => true]);
+            $this->info('Laravel Breeze configuré avec succès.');
         }
 
-        // Installer Laravel Permission
+        // Installation de Laravel Permission
         if ($this->confirm('Souhaitez-vous installer Spatie Laravel Permission ?')) {
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++Installation de Laravel Permission +++++++++++++++');
+            $this->info('+++++++++++++++ Installation de Laravel Permission +++++++++++++++');
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            
-            exec('composer require spatie/laravel-permission', $output, $status);
-            if ($status === 0) {
-                $this->info('Spatie Laravel Permission installé avec succès.');//ok
-            } else {
-                $this->error('Erreur lors de l\'installation de Spatie Laravel Permission.');
-            }
 
-            exec('php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"', $output, $status);
-            if ($status === 0) {
-                $this->info('Fichiers de configuration de Laravel Permission publiés avec succès.');//ok
-            } else {
-                $this->error('Erreur lors de la publication des fichiers de Laravel Permission.');
-            }
+            $this->call('composer', ['require', 'spatie/laravel-permission']);
+            $this->info('Spatie Laravel Permission installé avec succès.');
 
+            $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
+            $this->info('Fichiers de configuration de Laravel Permission publiés avec succès.');
         }
 
-        if ($this->confirm('Souhaitez-vous publier les vues ?')) {
+        // Publication des ressources
+        $this->publishResources('vues', 'sdisauth');
+        $this->publishResources('contrôleurs', 'sdisauth-controllers');
+        $this->publishResources('migrations', 'sdisauth-migrations');
+        $this->publishResources('configuration', 'config');
+        $this->publishResources('assets', 'sdisauth-assets');
+        $this->publishResources('routes', 'sdisauth-routes');
+
+        // Exécution des migrations après la publication des routes
+        $this->info('Lancement de la migration...');
+        $this->call('migrate');
+        $this->info('Migration effectuée avec succès ✅✅.');
+
+        $this->info('Installation terminée ✅🏆 FPM DEV TEAM => SDIS 🏆');
+    }
+
+    /**
+     * Méthode pour publier les ressources avec logs détaillés.
+     */
+    private function publishResources($type, $tag)
+    {
+        if ($this->confirm("Souhaitez-vous publier les {$type} ?")) {
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des vues...+++++++++++++++');
+            $this->info("+++++++++++++++++++ Publication des {$type}... +++++++++++++++");
             $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
+
+            $this->call('vendor:publish', ['--tag' => $tag]);
+
+            $this->info("++++++++++++++++++++ Publication des {$type} terminée ✅. ++++++++++++++++++++");
         }
-
-        if ($this->confirm('Souhaitez-vous publier les controlleurs ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des controlleurs...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth-controllers']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-        }
-
-        if ($this->confirm('Souhaitez-vous publier les migrations ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des migrations...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth-migrations']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-        }
-
-        // if ($this->confirm('Souhaitez-vous publier les seeders ?')) {
-        //     $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        //     $this->info('+++++++++++++++++++Publication des seeders...+++++++++++++++');
-        //     $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        //     $this->call('vendor:publish', ['--tag' => 'sdisauth-seeders']);
-        //     $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-        // }
-
-        if ($this->confirm('Souhaitez-vous publier la configuration ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication de la configuration...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'config']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-        }
-
-        if ($this->confirm('Souhaitez-vous publier les assets ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des assets...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth-assets']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-        }
-
-        if ($this->confirm('Souhaitez-vous publier les routes ?')) {
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->info('+++++++++++++++++++Publication des routes...+++++++++++++++');
-            $this->info('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            $this->call('vendor:publish', ['--tag' => 'sdisauth-routes']);
-            $this->info('++++++++++++++++++++ Terminé✅. ++++++++++++++++++++');
-            exec('php artisan migrate', $output, $status);
-            if ($status === 0) {
-                $this->info('Migration effectuée avec succès✅✅.');
-            } else {
-                $this->error('Erreur lors de l\'exécution de la migration.');
-            }
-        }
-
-        $this->info('Installation terminée ✅🏆FPM DEV TEAM => SDIS🏆');
     }
 }
