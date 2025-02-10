@@ -19,33 +19,29 @@ class AuthServiceProvider extends ServiceProvider
 
     public function boot()
     {   
-        $this->registerRoutes();
+        $this->registerRoutes();//ok plus de problème
         
-        // Log::info("Boot method called in AuthServiceProvider.");
-        // if (class_exists(\Spatie\Permission\PermissionServiceProvider::class)){
-        //     Log::info("avant route....");
-        //     $this->loadRoutesFrom(__DIR__.'/routes/userRolePermission.php');
-        //     Log::info("avant view");
-        //     $this->loadViewsFrom(__DIR__.'/resources/views', 'sdisauth');
-        //     Log::info("avant view pub");
-        //     $this->publishes([
-        //         __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
-        //     ], 'sdisauth');
-        //     Log::info("avant seeders");
-        //     $this->publishes([
-        //         __DIR__.'/database/seeders' => database_path('seeders'),
-        //     ], 'sdisauth');
-        //     Log::info("avant config");
-        //     $this->publishes([
-        //         __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
-        //     ], 'config');
-        //     Log::info("avant assets");
-        //     $this->publishes([
-        //         __DIR__.'/public' => public_path('vendor/sdisauth'),
-        //     ], 'sdisauth-assets');
-        // } else {
-        //     Log::warning("Spatie Permission Service Provider is not available.");
-        // }
+        Log::info("Boot method called in AuthServiceProvider.");
+
+        $this->loadRoutesFrom(__DIR__.'/routes/userRolePermission.php');
+
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'sdisauth');
+
+        // $this->publishes([
+        //     __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
+        // ], 'sdisauth');
+
+        // $this->publishes([
+        //     __DIR__.'/database/seeders' => database_path('seeders'),
+        // ], 'sdisauth');
+
+        // $this->publishes([
+        //     __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
+        // ], 'config');
+
+        // $this->publishes([
+        //     __DIR__.'/public' => public_path('vendor/sdisauth'),
+        // ], 'sdisauth-assets');
         
     }
 

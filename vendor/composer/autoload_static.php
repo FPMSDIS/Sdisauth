@@ -31,7 +31,6 @@ class ComposerStaticInited85b7642a7cdb8ae4b23917c67c13c8
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
-        '1012817b7f71c120688ac6e7bfb25497' => __DIR__ . '/../..' . '/src/routes/userRolePermission.php',
     );
 
     public static $prefixLengthsPsr4 = array (
