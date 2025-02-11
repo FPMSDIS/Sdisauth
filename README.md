@@ -23,15 +23,28 @@
 - 10- ```php artisan vendor:publish --tag=sdisauth-requests```
 - 11- ```php artisan breeze:install```
 - 12- ```php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"```
-- 13- ```php artisan migrate```
-- 14- ```php artisan config:clear```
-- 15- ```php artisan cache:clear```
-- 16- ```php artisan route:clear```
+- 13- Inclure les routes du package `sdisauth` dans le fichier de route de base `web.php`
+    ```require base_path('vendor/sdisauth/web/userRolePermission.php');```
+- 14- ```php artisan migrate```
+- 15- ```php artisan config:clear```
+- 16- ```php artisan cache:clear```
+- 17- ```php artisan route:clear```
+- 18- Vérifier si la route est disponible dans votre projet avec la commande suivante : ```php artisan route:list```
  
+
 ### **Deuxième Installation** 
 
 Une commande qui fait tout le travail pour vous, l'installation et la publication des fichiers
 - 1- ```php artisan sdisauth:install```
+- 2- Inclure les routes du package `sdisauth` dans le fichier de route de base `web.php`
+    ```require base_path('vendor/sdisauth/web/userRolePermission.php');```
+
+- 3- ```php artisan migrate```
+- 4- ```php artisan config:clear```
+- 5- ```php artisan cache:clear```
+- 6- ```php artisan route:clear```
+- 7- Vérifier si la route est disponible dans votre projet avec la commande suivante : ```php artisan route:list```
+
 
 ### **Usage**
 
