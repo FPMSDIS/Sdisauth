@@ -11,32 +11,34 @@
 
 ### Première Installation 
 
-- 1- Créez un nouveau projet Laravel en utilisant la commande `composer create-project --prefer-dist laravel/laravel monprojet`
-- 2- cd monprojet
-- 3- composer require "fpmsdis/sdisauth": "^1.0"
-- 4- php artisan vendor:publish --tag=sdisauth
-- 5- php artisan vendor:publish --tag=sdisauth-migrations
-- 6- php artisan vendor:publish --tag=config
-- 7- php artisan vendor:publish --tag=sdisauth-assets
-- 8- php artisan vendor:publish --tag=sdisauth-routes
-- 9- php artisan vendor:publish --tag=sdis.auth-controllers
-- 10- php artisan breeze:install
-- 11- php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-- 12- php artisan migrate
-- 13- php artisan config:clear
-- 14- php artisan cache:clear
-- 14- php artisan route:clear
+- 1- Créez un nouveau projet Laravel en utilisant la commande ```composer create-project --prefer-dist laravel/laravel monprojet```
+- 2- ```cd``` **monprojet**
+- 3- ```composer require "fpmsdis/sdisauth": "^1.0"```
+- 4- ```php artisan vendor:publish --tag=sdisauth```
+- 5- ```php artisan vendor:publish --tag=sdisauth-migrations```
+- 6- ```php artisan vendor:publish --tag=config```
+- 7- ```php artisan vendor:publish --tag=sdisauth-assets```
+- 8- ```php artisan vendor:publish --tag=sdisauth-routes```
+- 9- ```php artisan vendor:publish --tag=sdis.auth-controllers```
+- 10- ```php artisan breeze:install```
+- 11- ```php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"```
+- 12- ```php artisan migrate```
+- 13- ```php artisan config:clear```
+- 14- ```php artisan cache:clear```
+- 14- ```php artisan route:clear```
  
 ### **Deuxième Installation** 
 
 Une commande qui fait tout le travail pour vous, l'installation et la publication des fichiers
-- 1- php artisan sdisauth:install
+- 1- ```php artisan sdisauth:install```
 
 ### **Usage**
 
 - ✅ Utilisation de template dans le fichier de base : 
 
-    @extends(config('sdisauth.layout'))
+    ```@extends(config('sdisauth.layout'))```
 
 - ✅ Les vues sont intégrées dans le package (resources/views).
-- ✅ Les vues peuvent être utilisées directement depuis le package (view('sdisauth::auth.login')).
+- ✅ Les vues peuvent être utilisées directement depuis le package
+
+    ```view('sdisauth::auth.login'))```
