@@ -29,20 +29,22 @@ class InstallAuthPackageCommand extends Command
                 exit(1);
             } else {
                 $this->info("Laravel Breeze installé avec succès.");
+                // Installation de Breeze
+                $this->info("Instruction suivante");
+                exec('php artisan breeze:install', $output, $status);
+                if ($status !== 0) {
+                    $this->error('Erreur lors de la configuration de Laravel Breeze.');
+                    foreach ($output as $line) {
+                        $this->error($line);
+                    }
+                    exit(1);
+                } else {
+                    $this->info('Laravel Breeze configuré avec succès.');
+                }
             }
             // $this->info('Laravel Breeze installé avec succès.');
 
-            // Installation de Breeze
-            exec('php artisan breeze:install', $output, $status);
-            if ($status !== 0) {
-                $this->error('Erreur lors de la configuration de Laravel Breeze.');
-                foreach ($output as $line) {
-                    $this->error($line);
-                }
-                exit(1);
-            } else {
-                $this->info('Laravel Breeze configuré avec succès.');
-            }
+            
             // $this->info('Laravel Breeze configuré avec succès.');
         }
 
