@@ -1,7 +1,12 @@
 {
     "name": "fpmsdis/sdisauth",
     "description": "Un package d'authentification basé sur Laravel Breeze et Laravel Permission",
-    "author": "",
+    "author": {
+        "name": "fpmsdis",
+        "email": "fpmsdis@gmail.com",
+        "homepage": "https://github.com/fpmsdis",
+        "role": "Developper Full Stack PHP"
+    },
     "version": "1.0.0",
     "type": "library",
     "license": "MIT",
@@ -13,7 +18,7 @@
     "require": {
         "php": "^8.2",
         "laravel/breeze": "^2.2",
-        "spatie/laravel-permission": "*"
+        "spatie/laravel-permission": "^6.9"
     },
     "extra": {
         "laravel": {
