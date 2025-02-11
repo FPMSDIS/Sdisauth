@@ -37,7 +37,7 @@ class InstallAuthPackageCommand extends Command
         $this->call('migrate');
         $this->info('✅ Migration effectuée avec succès.');
         $this->info('🏆 Installation terminée avec succès ! - FPM DEV TEAM');
-        
+
     }
 
     private function installBreeze()
@@ -79,7 +79,8 @@ class InstallAuthPackageCommand extends Command
         }
     }
 
-    private function runCommand(array $command)
+    // private function runCommand(array $command)
+    protected function runCommand(array $command)
     {
         $process = new Process($command);
         $process->setTimeout(300); // 5 minutes max
