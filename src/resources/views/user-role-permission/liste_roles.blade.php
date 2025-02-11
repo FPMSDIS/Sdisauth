@@ -40,6 +40,7 @@
                                             <thead>
                                                 <tr class="active">
                                                     <th>ROLE</th>
+                                                    <th>SLUG</th>
                                                     <th>PERMISSION</th>
                                                     <th>ACTION</th>
                                                 </tr>
@@ -49,6 +50,7 @@
                                                 @foreach ($listRoles as $role)
                                                     <tr class="table-default">
                                                         <td>{{ $role->name }}</td>
+                                                        <td>{{ $role->slug ?: "Pas renseigné"}}</td>
                                                         <td>{{ $role->guard_name }}</td>
                                                         <td>
                                                             @can("modifier_role")

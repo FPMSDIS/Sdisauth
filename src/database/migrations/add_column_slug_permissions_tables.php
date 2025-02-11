@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('slug')->uniqid();   
+            $table->string('slug')->uniqid();
         });
 
     }

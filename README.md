@@ -19,13 +19,14 @@
 - 6- ```php artisan vendor:publish --tag=config```
 - 7- ```php artisan vendor:publish --tag=sdisauth-assets```
 - 8- ```php artisan vendor:publish --tag=sdisauth-routes```
-- 9- ```php artisan vendor:publish --tag=sdis.auth-controllers```
-- 10- ```php artisan breeze:install```
-- 11- ```php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"```
-- 12- ```php artisan migrate```
-- 13- ```php artisan config:clear```
-- 14- ```php artisan cache:clear```
-- 14- ```php artisan route:clear```
+- 9- ```php artisan vendor:publish --tag=sdisauth-controllers```
+- 10- ```php artisan vendor:publish --tag=sdisauth-requests```
+- 11- ```php artisan breeze:install```
+- 12- ```php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"```
+- 13- ```php artisan migrate```
+- 14- ```php artisan config:clear```
+- 15- ```php artisan cache:clear```
+- 16- ```php artisan route:clear```
  
 ### **Deuxième Installation** 
 

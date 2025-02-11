@@ -42,6 +42,7 @@
                                                 <thead>
                                                     <tr class="active">
                                                         <th>PERMISSION</th>
+                                                        <th>SLUG</th>
                                                         <th>GUARD</th>
                                                         <th>ACTION</th>
                                                     </tr>
@@ -59,6 +60,7 @@
                                                             {{-- <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                                                             <strong>{{ $i++ }}</td> --}}
                                                             <td>{{ $permissions->name }}</td>
+                                                            <td>{{ $permissions->slug ?: "Pas renseigné"}}</td>
                                                             <td>{{ $permissions->guard_name }}</td>
                                                             <td>
                                                                 @can("modifier_permission")

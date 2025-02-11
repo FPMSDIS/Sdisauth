@@ -55,15 +55,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
         ], 'sdisauth-controllers');
+
+        $this->publishes([
+            __DIR__.'/Http/Requests' => app_path('Http/Requests/Sdisauth'),
+        ], 'sdisauth-requests');
         
     }
 
-    // protected function registerRoutes()
-    // {
-    //     if (!$this->app->routesAreCached()) {
-    //         require __DIR__.'/routes/userRolePermission.php';
-    //     }
-    // }
     protected function registerRoutes()
     {
         if (!$this->app->routesAreCached()) {

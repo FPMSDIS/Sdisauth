@@ -1,23 +1,20 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
-
-
-use Illuminate\Http\Request;
-
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+
 use Illuminate\View\View;
-use App\Models\Parametre;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use Spatie\Permission\Models\Permission;
+use App\Http\Requests\ModificationPermissionRequest;
 use App\Http\Requests\{RoleRequest, PermissionRequest}; // Ajouter par OUATTARA
-use DataTables;
+use Str; // Ajouter par OUATTARA le 11/02/2025
 
 class UserRolePermissionController extends Controller
 {
@@ -63,7 +60,8 @@ class UserRolePermissionController extends Controller
 
     public function listeUtilisateurs()
     {
-        $listUser = User::get();
+        $listUser = User::where('email', "!=", "superadmin@fpmnet.ci")->get();
+        // dd($listUser);
         $listUsers = Parametre::transformeEnCollectionEtRetouneLaPagination($listUser);
         return view('user-role-permission.liste_utilisateurs', compact('listUsers'));
     }
@@ -96,7 +94,7 @@ class UserRolePermissionController extends Controller
         ///Permissions direct d'un user
         $permissions = $user->getDirectPermissions();//$user->permissions
         $permissionIds = array_map($mapForCB, $permissions->select('name', 'id')->toArray());
-        $permissionsAll = Permission::paginate(10);
+        $permissionsAll = Permission::paginate(25);
         foreach ($permissionsAll as $permissionAll) {
             if (in_array($permissionAll->id, $permissionIds)) {
                 $permissionAll->active = true;
@@ -138,7 +136,6 @@ class UserRolePermissionController extends Controller
 
     public function reinitialiserMotDePasseUtilisateur(Request $request)
     {
-
         $utilisateur = User::find($request->id);
 
         $utilisateur->password = Hash::make('password');
@@ -192,33 +189,25 @@ class UserRolePermissionController extends Controller
     }
 
 
-    /**
-     * Cette méthode class permet l'affichage des soldes et de la synthèse
-     * @author OUATTARA EL HADJ YOUSSOUF <youssouf.ouattara@fpmnet.ci>
-     * Date de mise à jour : 05/02/20225
-     */
-    public function ajouterPermission(AjouterPermissionRequest $request)
+    public function ajouterModifierPermission(PermissionRequest $request)
     {
-        Permission::create([
-            'name' => $request->permission,
-        ]);
-        return redirect()->route('liste.permissions')->with('status', "Permission ajoutée avec succès");
-    }
-
-    /**
-     * Cette méthode class permet l'affichage des soldes et de la synthèse
-     * @author OUATTARA EL HADJ YOUSSOUF <youssouf.ouattara@fpmnet.ci>
-     * Date de mise à jour : 05/02/20225
-     */
-    public function modifierPermission(ModificationPermissionRequest $request)
-    {
-        $permission = Permission::find($request->idPermission);
-        if (!$permission) {
-            return redirect()->route('liste.permissions')->with('error', "Permission introuvable");
+        dd("ok");
+        $message = "Permission crée avec succès";
+        if ($request->id) {
+            dd("a jour");
+            //Mise à jour
+            $permission = Permission::find($request->id);
+            $permission->name = $request->permission;
+            $permission->save();
+            $message = "Permission modifiée avec succès";
+        } else {
+            // dd("ici");
+            Permission::create([
+                'name' => $request->permission,
+            ]);
         }
-        $permission->update(['name' => $request->permission]);
 
-        return redirect()->route('liste.permissions')->with('status', "Permission modifiée avec succès");
+        return redirect()->route('liste.permissions')->with('status', $message);
     }
 
     public function supprimerPermission($idPermission)
@@ -264,13 +253,15 @@ class UserRolePermissionController extends Controller
 
             $role = Role::find($request->id);
             $role->name = $request->name;
+            $role->slug = Str::slug($request->name);
             $role->save();
             $message = "Role modifié avec succès";
-            dd("role modifié");
+            // dd("role modifié");
         } else {
 
             $role = Role::create([
                 'name' => $request->name,
+                'slug' => Str::slug($request->name)
             ]);
 
         }
@@ -303,23 +294,6 @@ class UserRolePermissionController extends Controller
         return view('user-role-permission.modification_role', compact('permissionsAll', 'role'));
     }
 
-    public function modifierRolePermissionOLD(Request $request)
-    {
-
-        $role = Role::find($request->id);
-        $permissionId = array();
-        $role->syncPermissions([]);
-        if ($request->customSwitchPermissions) {
-            foreach ($request->customSwitchPermissions as $key => $customSwitchPermission) {
-                $permissionId[] = $key;
-            }
-            $permissions = Permission::whereIn('id', $permissionId)->get();
-
-            $role->syncPermissions($permissions);
-        }
-        $message = "Permissions et roles modifiées avec succès";
-        return redirect()->route('liste.roles')->with('status', $message);
-    }
 
     /**
      * Modifie un rôle et ses permissions.
@@ -337,6 +311,7 @@ class UserRolePermissionController extends Controller
 
         $role = Role::find($request->id);
         $role->name = $request->name;
+        $role->slug = Str::slug($request->name);
         $permissionId = array();
         $role->syncPermissions([]);
         if ($request->customSwitchPermissions) {
@@ -344,7 +319,6 @@ class UserRolePermissionController extends Controller
                 $permissionId[] = $key;
             }
             $permissions = Permission::whereIn('id', $permissionId)->get();
-
             $role->syncPermissions($permissions);
         }
         $role->save();
@@ -369,7 +343,6 @@ class UserRolePermissionController extends Controller
             $message = "Il existe au moins une permission ou un utilisateur qui a ce role";
             $status = 'info';
         }
-
 
         return redirect()->route('liste.roles')->with($status, $message);
     }
@@ -444,6 +417,83 @@ class UserRolePermissionController extends Controller
             return back()->with('error', "Utilisateur introuvable.");//Trouver le moyen de gérer cette erreur
         }
         return view('user-role-permission.formulaire-suppression-utilisateur', compact('utilisateur'));
+    }
+
+    public function modifierRolesPermissionsUtilisateurEnsemble(Request $request){
+
+
+        $utilisateur = User::find($request->id);
+        $utilisateur->name = $request->name;
+        $utilisateur->email = $request->email;
+        $utilisateur->save();
+
+        $utilisateur = User::find($request->id);
+        $rolesId = array();
+
+        // Je supprime tous roles existant de l'utilisateur
+        $utilisateur->syncRoles([]);
+        //Si au moins un role a été activé
+        if ($request->customSwitchRoles) {
+
+            // Je cree ensuite un tableau de roles
+            foreach ($request->customSwitchRoles as $key => $customSwitchRole) {
+
+                $rolesId[] = $key;
+            }
+            //Je cree ensuite ses nouveaux roles
+            $roles = Role::whereIn('id', $rolesId)->get();
+            $utilisateur->syncRoles($roles);
+        }
+
+        $permissionId = array();
+        // Je supprime toutes les permissions directes  de l'utilisateur
+        $utilisateur->syncPermissions([]);
+        if ($request->customSwitchPermissions) {
+            // Je cree ensuite ses nouvelles permissions
+            foreach ($request->customSwitchPermissions as $key => $customSwitchPermission) {
+                $permissionId[] = $key;
+            }
+
+            //Je cree ensuite ses nouveaux permissions
+            $permissions = Permission::whereIn('id', $permissionId)->get();
+            $utilisateur->syncPermissions($permissions);
+        }
+
+
+        return redirect()->route('liste.utilisateurs')->with('status', "Utilisateur modifié avec succès !");
+
+
+    }
+
+
+    public function ajouterPermission(Request $request)
+    {
+        $permissions = Permission::get();
+        foreach($permissions as $p){
+            if($p->name == $request->permission){
+                return redirect()->route('liste.permissions')->with('error', "Permission existe déjà");
+            }
+        }
+
+        Permission::create([
+            'name' => $request->permission,
+            'slug' => Str::slug($request->permission)
+        ]);
+        return redirect()->route('liste.permissions')->with('status', "Permission ajoutée avec succès");
+    }
+
+    public function modifierPermission(ModificationPermissionRequest $request)
+    {
+        $permission = Permission::find($request->idPermission);
+        if (!$permission) {
+            return redirect()->route('liste.permissions')->with('error', "Permission introuvable");
+        }
+        $permission->update([
+            'name' => $request->permission,
+            'slug' => Str::slug($request->permission)
+        ]);
+
+        return redirect()->route('liste.permissions')->with('status', "Permission modifiée avec succès");
     }
 
 
