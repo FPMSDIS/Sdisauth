@@ -28,12 +28,6 @@
         }
     },
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/fpmsdis/sdisauth"
-        }
-    ],
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
