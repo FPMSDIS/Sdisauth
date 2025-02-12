@@ -1,6 +1,6 @@
 <?php
 
-namespace Sdisauth\Http\Requests;
+namespace App\Http\Requests\Sdisauth;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
