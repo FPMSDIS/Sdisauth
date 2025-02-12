@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         $this->loadViewsFrom(__DIR__.'/resources/views');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
+        // $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
 
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
