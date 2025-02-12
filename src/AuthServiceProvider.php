@@ -26,10 +26,11 @@ class AuthServiceProvider extends ServiceProvider
         Log::info("Boot method called in AuthServiceProvider.");
 
 
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'sdisauth');
+        $this->loadViewsFrom(__DIR__.'/resources/views');
+        $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
 
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/sdisauth'),
+            __DIR__.'/resources/views' => resource_path('views'),
         ], 'sdisauth');
 
         $this->publishes([
@@ -41,11 +42,11 @@ class AuthServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/public' => public_path('sdisauth'),
+            __DIR__.'/public' => public_path(),
         ], 'sdisauth-assets');
 
         $this->publishes([
-            __DIR__.'/routes/web' => base_path('routes/sdisauth/web'),
+            __DIR__.'/routes/web' => base_path('routes/web'),
         ], 'sdisauth-routes');
         
         $this->publishes([

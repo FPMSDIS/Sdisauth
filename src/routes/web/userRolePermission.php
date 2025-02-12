@@ -34,15 +34,15 @@ if (class_exists(Route::class)) {
                 ->name('liste.permissions');
             Route::get('liste/permissions/data', [UserRolePermissionController::class, 'listePermissionsData'])
                 ->name('liste.permissions.data');
-            // Route::post('ajouter/modifier/permission', [UserRolePermissionController2::class, 'ajouterModifierPermission'])
+            // Route::post('ajouter/modifier/permission', [UserRolePermissionController::class, 'ajouterModifierPermission'])
             //                 ->name('ajouter.modifier.permission');
-            Route::post('ajouter/permission', [UserRolePermissionController2::class, 'ajouterPermission'])
+            Route::post('ajouter/permission', [UserRolePermissionController::class, 'ajouterPermission'])
                 ->name('ajouter.modifier.permission');
 
-            Route::post('ajouter/permission', [UserRolePermissionController2::class, 'modifierPermission'])
+            Route::post('ajouter/permission', [UserRolePermissionController::class, 'modifierPermission'])
                 ->name('ajouter.modifier.permission');
 
-            Route::post('supprimer/permission/{idPermission}', [UserRolePermissionController2::class, 'supprimerPermission'])
+            Route::post('supprimer/permission/{idPermission}', [UserRolePermissionController::class, 'supprimerPermission'])
                 ->name('supprimer.permission');
             /************************************* */
             Route::get('liste/roles', [UserRolePermissionController::class, 'listeRoles'])
