@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Controllers\Sdisauth;
+// namespace App\Http\Controllers\Sdisauth;
+namespace Sdisauth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 

@@ -29,12 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/resources/views', 'sdisauth');
 
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/sdisauth'),
+            __DIR__.'/resources/views' => resource_path('views/sdisauth'),
         ], 'sdisauth');
-
-        // $this->publishes([
-        //     __DIR__.'/database/seeders' => database_path('seeders'),
-        // ], 'sdisauth');
 
         $this->publishes([
             __DIR__.'/database/migrations' => database_path('migrations'),
@@ -45,11 +41,11 @@ class AuthServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/public' => public_path('vendor/sdisauth'),
+            __DIR__.'/public' => public_path('sdisauth'),
         ], 'sdisauth-assets');
 
         $this->publishes([
-            __DIR__.'/routes/web' => base_path('routes/vendor/sdisauth/web'),
+            __DIR__.'/routes/web' => base_path('routes/sdisauth/web'),
         ], 'sdisauth-routes');
         
         $this->publishes([
