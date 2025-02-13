@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\Sdisauth\DashbordController;
 use Illuminate\Support\Facades\Route;
 
 

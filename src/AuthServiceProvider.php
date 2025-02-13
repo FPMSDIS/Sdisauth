@@ -25,20 +25,26 @@ class AuthServiceProvider extends ServiceProvider
         
         Log::info("Boot method called in AuthServiceProvider.");
 
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/web/auth.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/web/authentificationRoutes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/web/dashboardRoutes.php');
         $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
 
         // Supprimer les anciennes vues avant de publier
         $viewsPath = resource_path('views');
-        if (File::exists($viewsPath)) {
-            $files = File::files($viewsPath);
+        // if (File::exists($viewsPath)) {
+        //     $files = File::files($viewsPath);
 
-            foreach ($files as $file) {
-                if ($file->getFilename() !== 'welcome.blade.php') {
-                    File::delete($file->getPathname()); // Supprime les fichiers sauf welcome.blade.php
-                }
-            }
-        }
-        
+        //     foreach ($files as $file) {
+        //         if ($file->getFilename() !== 'welcome.blade.php' 
+        //                 && $file->getFilename() !== 'dashboard.blade.php'
+        //                 && $file->getFilename() !== 'index.blade.php') {
+        //             File::delete($file->getPathname()); 
+        //         }
+        //     }
+        // }
+
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
         ], 'sdisauth');
