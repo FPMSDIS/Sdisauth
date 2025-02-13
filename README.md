@@ -18,7 +18,7 @@
     ```
 
 - 2- ```cd``` **monprojet**
-- 3- ```composer require "fpmsdis/sdisauth": "^1.0"```
+- 3- ```composer require fpmsdis/sdisauth```
 - 3- ```php artisan breeze:install```
 - 4- 
     ```
@@ -67,7 +67,7 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
         
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
         php artisan vendor:publish --provider="Sdisauth\AuthServiceProvider"
-        
+
     ```
 
 - 2-
