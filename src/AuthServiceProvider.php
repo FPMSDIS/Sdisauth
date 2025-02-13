@@ -30,8 +30,15 @@ class AuthServiceProvider extends ServiceProvider
         // Supprimer les anciennes vues avant de publier
         $viewsPath = resource_path('views');
         if (File::exists($viewsPath)) {
-            File::cleanDirectory($viewsPath); // Supprime tout dans le dossier views
+            $files = File::files($viewsPath);
+
+            foreach ($files as $file) {
+                if ($file->getFilename() !== 'welcome.blade.php') {
+                    File::delete($file->getPathname()); // Supprime les fichiers sauf welcome.blade.php
+                }
+            }
         }
+        
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
         ], 'sdisauth');
