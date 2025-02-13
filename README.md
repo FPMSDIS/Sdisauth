@@ -64,8 +64,10 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
     ou
 
     ```
+        
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
         php artisan vendor:publish --provider="Sdisauth\AuthServiceProvider"
+        
     ```
 
 - 2-
