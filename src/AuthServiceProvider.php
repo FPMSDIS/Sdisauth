@@ -21,15 +21,9 @@ class AuthServiceProvider extends ServiceProvider
 
     public function boot()
     {   
-        $this->registerRoutes();//ok plus de problème
+        $this->registerRoutes();
         
         Log::info("Boot method called in AuthServiceProvider.");
-
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/auth.php');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/authentificationRoutes.php');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/dashboardRoutes.php');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
 
         // Supprimer les anciennes vues avant de publier
         $viewsPath = resource_path('views');
