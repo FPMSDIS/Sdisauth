@@ -14,9 +14,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->commands([
             InstallAuthPackageCommand::class,
         ]);
-
-        // $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
     }
 
     public function boot()
