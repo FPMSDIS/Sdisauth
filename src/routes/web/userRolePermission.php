@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Sdisauth\Http\Controllers\UserRolePermissionController;
+use App\Http\Controllers\Sdisauth\UserRolePermissionController;
 
 if (class_exists(Route::class)) {
     Route::middleware(['web'])

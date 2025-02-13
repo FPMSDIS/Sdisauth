@@ -80,7 +80,7 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
 
 ### **Usage**
 
-- ✅ Utilisation de template dans le fichier de base : 
+- ✅ Utilisation de template dans le fichier de base avant publication : 
 
     ``` 
         @extends('sdisauth::layouts.auth')
@@ -89,9 +89,23 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
         @endsection
     ```
 
-- ✅ Utilisation des vues dans les controllers
+- ✅ Utilisation de template dans le fichier de base après publication : 
+
+    ``` 
+        @extends('layouts.auth')
+        @section('content')
+            <h1>Bienvenue sur mon package !</h1>
+        @endsection
+    ```
+
+- ✅ Utilisation des vues dans les controllers avant publication
     ```
         return view('sdisauth::dashboard');
+    ```
+
+- ✅ Utilisation des vues dans les controllers après publication
+    ```
+        return view('dashboard');
     ```
 
 - ✅ Gestion des Assets (CSS, JS, Images)

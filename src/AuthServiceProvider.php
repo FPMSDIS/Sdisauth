@@ -25,10 +25,13 @@ class AuthServiceProvider extends ServiceProvider
         
         Log::info("Boot method called in AuthServiceProvider.");
 
+        $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
 
-        $this->loadViewsFrom(__DIR__.'/resources/views');
-        // $this->loadRoutesFrom(__DIR__.'/routes/web/userRolePermission.php');
-
+        // Supprimer les anciennes vues avant de publier
+        $viewsPath = resource_path('views');
+        if (File::exists($viewsPath)) {
+            File::cleanDirectory($viewsPath); // Supprime tout dans le dossier views
+        }
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
         ], 'sdisauth');

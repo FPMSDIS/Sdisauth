@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'layout' => 'layouts.base'
+    'layout' => 'layouts.base',
+    'title' => "Nom de l'Application",
 ];
