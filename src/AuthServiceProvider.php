@@ -36,8 +36,11 @@ class AuthServiceProvider extends ServiceProvider
         //     }
         // }
 
+        $packageViews = __DIR__.'/resources/views';
+        $appViews = resource_path('views');
+        $this->deleteOldViews($packageViews, $appViews);
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views'),
+            $packageViews => $appViews,
         ], 'sdisauth');
 
         $this->publishes([
@@ -75,6 +78,54 @@ class AuthServiceProvider extends ServiceProvider
                 require $routeFile->getPathname();
             }
         }
+    }
+
+        /**
+     * Supprime les anciens fichiers/dossiers de vues avant publication.
+     */
+    protected function deleteOldViews(string $source, string $destination)
+    {
+        if (!file_exists($destination)) {
+            return;
+        }
+
+        $items = scandir($source);
+
+        foreach ($items as $item) {
+            if ($item === '.' || $item === '..') {
+                continue;
+            }
+
+            $sourceItem = $source . DIRECTORY_SEPARATOR . $item;
+            $destItem = $destination . DIRECTORY_SEPARATOR . $item;
+
+            if (is_dir($sourceItem)) {
+                // Supprimer le dossier correspondant dans l'application Laravel
+                $this->deleteDirectory($destItem);
+            } elseif (file_exists($destItem)) {
+                // Supprimer le fichier correspondant
+                unlink($destItem);
+            }
+        }
+    }
+
+    /**
+     * Supprime récursivement un dossier.
+     */
+    protected function deleteDirectory(string $dir)
+    {
+        if (!is_dir($dir)) {
+            return;
+        }
+
+        $files = array_diff(scandir($dir), ['.', '..']);
+
+        foreach ($files as $file) {
+            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            is_dir($filePath) ? $this->deleteDirectory($filePath) : unlink($filePath);
+        }
+
+        rmdir($dir);
     }
 
 }
