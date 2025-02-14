@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserRolePermissionController;
+use App\Http\Controllers\Sdisauth\UserRolePermissionController;
 use Illuminate\Support\Facades\Route;
 
 // Route::group(['middleware' => ['role:admin']], function () {

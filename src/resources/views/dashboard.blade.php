@@ -77,10 +77,10 @@
                                 <i style="margin:.75em" class="fa-solid fa-message"></i>
                             </div>
                         </div>
-                        {{-- <span class="fw-semibold d-block mb-1"><a href="{{ route('liste.solde') }}">SMS DISPONIBLES</a></span> --}}
+
                         <span class="fw-semibold d-block mb-1" style="color: rgba(0,0,255, .5)">SMS DISPONIBLES</span>
                         <h3 class="card-title text-nowrap mb-2">
-                            <a href="{{ route('liste.solde') }}" style="color: #FFF; font-weight: bolder;">{{ number_format($smsDisponible, 0, ',', ' ') }}</a>
+                            <a href="#" style="color: #FFF; font-weight: bolder;">{{ number_format($smsDisponible, 0, ',', ' ') }}</a>
                         </h3>
                     </div>
                 </div>
@@ -97,10 +97,10 @@
                                 <i style="margin:.75em" class="fa-solid fa-message"></i>
                             </div>
                         </div>
-                        {{-- <span class="fw-semibold d-block mb-1"><a href="{{ route('synthese') }}">SMS UTILISES</a></span> --}}
+                        {{-- <span class="fw-semibold d-block mb-1"><a href="#">SMS UTILISES</a></span> --}}
                         <span class="fw-semibold d-block mb-1" style="color: rgba(0,0,255, .5)">SMS UTILISES</span>
                         <h3 class="card-title mb-2">
-                            <a href="{{ route('synthese') }}" style="color: #FFF; font-weight: bolder;">{{ number_format($nombreSmsUtilise, 0, ',', ' ') }}</a>
+                            <a href="#" style="color: #FFF; font-weight: bolder;">{{ number_format($nombreSmsUtilise, 0, ',', ' ') }}</a>
                         </h3>
                     </div>
                 </div>
@@ -116,9 +116,9 @@
                                 <i style="margin:.65em" class="fa-solid fa-cart-shopping"></i>
                             </div>
                         </div>
-                        <span class="fw-semibold d-block mb-1"> <a href="{{ route('historique.achats') }}">NOMBRE D'ACHATS</a></span>
+                        <span class="fw-semibold d-block mb-1"> <a href="#">NOMBRE D'ACHATS</a></span>
                         <h3 class="card-title text-nowrap mb-2">
-                            <a href="{{ route('historique.achats') }}" style="color: #FFF; font-weight: bolder;">{{ $nombreAchat }}</a>
+                            <a href="#" style="color: #FFF; font-weight: bolder;">{{ $nombreAchat }}</a>
                         </h3>
                     </div>
                 </div>

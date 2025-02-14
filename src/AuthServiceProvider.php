@@ -19,22 +19,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {   
         $this->registerRoutes();
-        
-        Log::info("Boot method called in AuthServiceProvider.");
-
-        // Supprimer les anciennes vues avant de publier
-        $viewsPath = resource_path('views');
-        // if (File::exists($viewsPath)) {
-        //     $files = File::files($viewsPath);
-
-        //     foreach ($files as $file) {
-        //         if ($file->getFilename() !== 'welcome.blade.php' 
-        //                 && $file->getFilename() !== 'dashboard.blade.php'
-        //                 && $file->getFilename() !== 'index.blade.php') {
-        //             File::delete($file->getPathname()); 
-        //         }
-        //     }
-        // }
 
         $packageViews = __DIR__.'/resources/views';
         $appViews = resource_path('views');
@@ -48,6 +32,10 @@ class AuthServiceProvider extends ServiceProvider
         ], 'sdisauth-migrations');
 
         $this->publishes([
+            __DIR__.'/database/seeders' => database_path('seeders'),
+        ], 'sdisauth-seeders');
+        
+        $this->publishes([
             __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
         ], 'config');
 
@@ -59,6 +47,10 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/routes/web' => base_path('routes/web'),
         ], 'sdisauth-routes');
         
+        $this->publishes([
+            __DIR__.'/Http/Models' => app_path('Http/Models/Sdisauth'),
+        ], 'sdisauth-models');
+
         $this->publishes([
             __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
         ], 'sdisauth-controllers');
