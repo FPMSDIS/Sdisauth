@@ -32,6 +32,7 @@
 - 10- ```php artisan vendor:publish --tag=sdisauth-controllers```
 - 11- ```php artisan vendor:publish --tag=sdisauth-requests```
 - 12- ```php artisan vendor:publish --tag=sdisauth-routes```
+- 13- Créer un fichier authentificationRoutes.php dans routes/web/..
 - 13- 
     ```
         php artisan migrate
