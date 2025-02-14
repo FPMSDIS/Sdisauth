@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $packageViews = __DIR__.'/resources/views';
         $appViews = resource_path('views');
-        $this->deleteOldViews($packageViews, $appViews);
+        // $this->deleteOldViews($packageViews, $appViews);
         $this->publishes([
             $packageViews => $appViews,
         ], 'sdisauth');
