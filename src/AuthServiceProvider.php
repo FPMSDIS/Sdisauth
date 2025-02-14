@@ -61,14 +61,6 @@ class AuthServiceProvider extends ServiceProvider
         ], 'sdisauth-controllers');
 
         $this->publishes([
-            __DIR__.'/Http/Controllers/Auth' => app_path('Http/Controllers/Auth'),
-        ], 'sdisauth-controllers-auth');
-    
-        if (!file_exists(app_path('Http/Controllers/Auth/EmailVerificationPromptController.php'))) {
-            copy(__DIR__.'/Http/Controllers/Auth/EmailVerificationPromptController.php', app_path('Http/Controllers/Auth/EmailVerificationPromptController.php'));
-        }
-
-        $this->publishes([
             __DIR__.'/Http/Requests' => app_path('Http/Requests/Sdisauth'),
         ], 'sdisauth-requests');
         
