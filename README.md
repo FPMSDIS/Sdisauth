@@ -19,32 +19,33 @@
 
 - 2- ```cd``` **monprojet**
 - 3- ```composer require fpmsdis/sdisauth```
-- 3- ```php artisan breeze:install```
-- 4- 
+- 4- ```php artisan breeze:install```
+- 5- 
     ```
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
     ```
-- 5- ``` php artisan vendor:publish --tag=sdisauth --force ```
-- 6- ``` php artisan vendor:publish --tag=sdisauth-migrations --force ```
-- 7- ``` php artisan vendor:publish --tag=config --force ```
-- 8- ``` php artisan vendor:publish --tag=sdisauth-assets --force ```
-- 9- ``` php artisan vendor:publish --tag=sdisauth-routes --force ```
-- 10- ``` php artisan vendor:publish --tag=sdisauth-controllers --force ```
-- 11- ``` php artisan vendor:publish --tag=sdisauth-requests --force ```
-- 12- ``` php artisan vendor:publish --tag=sdisauth-models --force ```
-- 13- ``` php artisan vendor:publish --tag=sdisauth-seeders --force ```
+- 6- 
+    ``` 
+        php artisan vendor:publish --tag=sdisauth --force
+        php artisan vendor:publish --tag=sdisauth-migrations --force
+        php artisan vendor:publish --tag=config --force
+        php artisan vendor:publish --tag=sdisauth-assets --force
+        php artisan vendor:publish --tag=sdisauth-routes --force
+        php artisan vendor:publish --tag=sdisauth-controllers --force
+        php artisan vendor:publish --tag=sdisauth-requests --force
+        php artisan vendor:publish --tag=sdisauth-models --force
+        php artisan vendor:publish --tag=sdisauth-seeders --force 
+    ```
 
-- 14- Décommentez tout le contenu du  fichier ```authentificationRoutes.php``` se trouvant dans : ``` routes/web/.. ```
+- 7- Décommentez tout le contenu du  fichier ``` authentificationRoutes.php ``` se trouvant dans : ``` routes/web/.. ```
+- 8- Supprimez tout le contenu du fichier auth.php à la racine du dossier ``` routes/... ``` (Facultatif)
     
-- 15- Actualiser les informations de l'application
+- 9- Actualiser les informations de l'application
     ```
-        php artisan migrate
-        php artisan db:seed
-        php artisan config:clear
-        php artisan cache:clear
-        php artisan route:clear
+        php artisan migrate:fresh --seed
+        php artisan optimize:clear
     ```
-- 13- Vérifier si la route est disponible dans votre projet avec la commande suivante : ```php artisan route:list```
+- 10- Vérifier si la route est disponible dans votre projet avec la commande suivante : ```php artisan route:list```
 
 ## ✅ Résumé du comportement après publication
 Visible sur 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)
@@ -67,33 +68,28 @@ Visible sur 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)
 - `spatie/laravel-permission` : `^6.9`
 
 
-### **Deuxième Installation**
+
+## **Deuxième Installation**
 
 Une commande qui fait tout le travail pour vous, l'installation et la publication des fichiers
 - 1- 
     ```
-        php artisan sdisauth:install
-    ```
-    ou
-
-    ```
-        
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
         php artisan vendor:publish --provider="Sdisauth\AuthServiceProvider" --force
-
     ```
 - 2- Décommentez tout le contenu du  fichier ```authentificationRoutes.php``` se trouvant dans : ``` routes/web/.. ```
+- 3- Supprimez tout le contenu du fichier auth.php à la racine du dossier ``` routes/... ``` (Facultatif)
 
 - 4-
     ```
-        php artisan migrate
-        php artisan db:seed
-        php artisan config:clear
-        php artisan cache:clear
-        php artisan route:clear
+        php artisan migrate:fresh --seed
+        php artisan optimize:clear
     ```
 
-- 5- Vérifier si la route est disponible dans votre projet avec la commande suivante :      ```php artisan route:list```
+- 5- Vérifier si la route est disponible dans votre projet avec la commande suivante :      
+    ```
+        php artisan route:list
+    ```
 
 
 ### **Usage**
@@ -141,8 +137,8 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
         ```
 ## Accès à l'application (Compte crée) Admin
 
-    - Login : **admin@fpmnet.ci**
-    - Mot de passe : **password**
+### Login : **admin@fpmnet.ci**
+### Mot de passe : **password**
 
 ## Auteur
 
