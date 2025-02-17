@@ -4,7 +4,6 @@ namespace Sdisauth;
 
 use Sdisauth\Console\InstallAuthPackageCommand;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
 class AuthServiceProvider extends ServiceProvider
@@ -20,45 +19,38 @@ class AuthServiceProvider extends ServiceProvider
     {   
         $this->registerRoutes();
 
-        $packageViews = __DIR__.'/resources/views';
-        $appViews = resource_path('views');
-        // $this->deleteOldViews($packageViews, $appViews);
-        $this->publishes([
-            $packageViews => $appViews,
-        ], 'sdisauth');
-
-        $this->publishes([
+        $this->publishWithOverwrite([
+            __DIR__.'/resources/views' => resource_path('views'),
             __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'sdisauth-migrations');
-
-        $this->publishes([
             __DIR__.'/database/seeders' => database_path('seeders'),
-        ], 'sdisauth-seeders');
-        
-        $this->publishes([
             __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
-        ], 'config');
-
-        $this->publishes([
             __DIR__.'/public' => public_path(),
-        ], 'sdisauth-assets');
-
-        $this->publishes([
             __DIR__.'/routes/web' => base_path('routes/web'),
-        ], 'sdisauth-routes');
-        
-        $this->publishes([
-            __DIR__.'/Http/Models' => app_path('Http/Models/Sdisauth'),
-        ], 'sdisauth-models');
-
-        $this->publishes([
+            __DIR__.'/Models' => app_path('Models'),
             __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
-        ], 'sdisauth-controllers');
-
-        $this->publishes([
             __DIR__.'/Http/Requests' => app_path('Http/Requests/Sdisauth'),
-        ], 'sdisauth-requests');
-        
+        ]);
+    }
+
+    /**
+     * Publie les fichiers en écrasant les existants.
+     */
+    protected function publishWithOverwrite(array $paths)
+    {
+        foreach ($paths as $from => $to) {
+            $this->deleteExisting($to);
+            $this->publishes([$from => $to], 'sdisauth', true);
+        }
+    }
+
+    /**
+     * Supprime les fichiers et dossiers existants avant la publication.
+     */
+    protected function deleteExisting($path)
+    {
+        if (File::exists($path)) {
+            File::isDirectory($path) ? File::deleteDirectory($path) : File::delete($path);
+        }
     }
 
     protected function registerRoutes()
@@ -71,53 +63,4 @@ class AuthServiceProvider extends ServiceProvider
             }
         }
     }
-
-        /**
-     * Supprime les anciens fichiers/dossiers de vues avant publication.
-     */
-    protected function deleteOldViews(string $source, string $destination)
-    {
-        if (!file_exists($destination)) {
-            return;
-        }
-
-        $items = scandir($source);
-
-        foreach ($items as $item) {
-            if ($item === '.' || $item === '..') {
-                continue;
-            }
-
-            $sourceItem = $source . DIRECTORY_SEPARATOR . $item;
-            $destItem = $destination . DIRECTORY_SEPARATOR . $item;
-
-            if (is_dir($sourceItem)) {
-                // Supprimer le dossier correspondant dans l'application Laravel
-                $this->deleteDirectory($destItem);
-            } elseif (file_exists($destItem)) {
-                // Supprimer le fichier correspondant
-                unlink($destItem);
-            }
-        }
-    }
-
-    /**
-     * Supprime récursivement un dossier.
-     */
-    protected function deleteDirectory(string $dir)
-    {
-        if (!is_dir($dir)) {
-            return;
-        }
-
-        $files = array_diff(scandir($dir), ['.', '..']);
-
-        foreach ($files as $file) {
-            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
-            is_dir($filePath) ? $this->deleteDirectory($filePath) : unlink($filePath);
-        }
-
-        rmdir($dir);
-    }
-
 }

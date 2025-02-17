@@ -57,71 +57,46 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        @hasanyrole('admin|superadmin')
-            <li class="menu-item {{ Request::is('dashboard') ? 'active' : '' }}">
+        @can("voir_tableau_de_bord")
+        <li class="menu-item {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">TABLEAU DE BORD</div>
                 </a>
-            </li>
-        @endhasanyrole
-
+        </li>
+        @endcan
         <!-- Gestion des utilisateurs -->
-        @hasanyrole('admin|superadmin')
-            <li class="menu-item {{ Request::is('liste/permissions*') || Request::is('liste/roles*') || Request::is('liste/utilisateurs*') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('liste/permissions*') || Request::is('liste/roles*') || Request::is('liste/utilisateurs*') ? 'active open' : '' }}">
+            @can("voir_gestion_des_utilisateurs")
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">GESTION DES UTILISATEURS</div>
                 </a>
-                <ul class="menu-sub">
+            @endcan
+            <ul class="menu-sub">
+                @can("lister_permission")
                     <li class="menu-item {{ Request::is('liste/permissions') ? 'active' : '' }}">
                         <a href="{{ route('liste.permissions') }}" class="menu-link">
                             <div data-i18n="Without menu">Permissions</div>
                         </a>
                     </li>
+                @endcan
+                @can("lister_role")
                     <li class="menu-item {{ Request::is('liste/roles') ? 'active' : '' }}">
                         <a href="{{ route('liste.roles') }}" class="menu-link">
                             <div data-i18n="Without navbar">Rôles</div>
                         </a>
                     </li>
+                @endcan
+                @can("lister_utilisateur")
                     <li class="menu-item {{ Request::is('liste/utilisateurs') ? 'active' : '' }}">
                         <a href="{{ route('liste.utilisateurs') }}" class="menu-link">
                             <div data-i18n="Container">Utilisateurs</div>
                         </a>
                     </li>
-                </ul>
-            </li>
-        @endhasanyrole
-
-        <!-- Gestion des SMS -->
-        @hasanyrole('admin|superadmin')
-            <li class="menu-item {{ Request::is('gestionsms*') ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">GESTION DES SMS</div>
-                </a>
-                <ul class="menu-sub">
-                    @can("lister_historique_des_achats")
-                        <li class="menu-item {{ Request::is('gestionsms/obtenir/solde') ? 'active' : '' }}">
-                            <a href="{{ route('liste.solde') }}" class="menu-link">
-                                <div data-i18n="Account">Solde</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Request::is('gestionsms/synthese/sms') ? 'active' : '' }}">
-                            <a href="{{ route('synthese') }}" class="menu-link">
-                                <div data-i18n="Notifications">Synthèse d'Utilisation</div>
-                            </a>
-                        </li>
-
-                        <li class="menu-item {{ Request::is('gestionsms/historique/achats') ? 'active' : '' }}">
-                            <a href="{{ route('historique.achats') }}" class="menu-link">
-                                <div data-i18n="Connections">Historique des Achats</div>
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endhasanyrole
+                @endcan
+            </ul>
+        </li>
     </ul>
 
 </aside>

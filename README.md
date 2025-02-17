@@ -24,17 +24,17 @@
     ```
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
     ```
-- 5- ```php artisan vendor:publish --tag=sdisauth```
-- 6- ```php artisan vendor:publish --tag=sdisauth-migrations```
-- 7- ```php artisan vendor:publish --tag=config```
-- 8- ```php artisan vendor:publish --tag=sdisauth-assets```
-- 9- ```php artisan vendor:publish --tag=sdisauth-routes```
-- 10- ```php artisan vendor:publish --tag=sdisauth-controllers```
-- 11- ```php artisan vendor:publish --tag=sdisauth-requests```
-- 12- ```php artisan vendor:publish --tag=sdisauth-models```
-- 13- ```php artisan vendor:publish --tag=sdisauth-seeders```
+- 5- ``` php artisan vendor:publish --tag=sdisauth --force ```
+- 6- ``` php artisan vendor:publish --tag=sdisauth-migrations --force ```
+- 7- ``` php artisan vendor:publish --tag=config --force ```
+- 8- ``` php artisan vendor:publish --tag=sdisauth-assets --force ```
+- 9- ``` php artisan vendor:publish --tag=sdisauth-routes --force ```
+- 10- ``` php artisan vendor:publish --tag=sdisauth-controllers --force ```
+- 11- ``` php artisan vendor:publish --tag=sdisauth-requests --force ```
+- 12- ``` php artisan vendor:publish --tag=sdisauth-models --force ```
+- 13- ``` php artisan vendor:publish --tag=sdisauth-seeders --force ```
 
-- 14- Créer un fichier authentificationRoutes.php dans ```routes/web/..```
+- 14- Créer un fichier authentificationRoutes.php dans ``` routes/web/.. ```
     ```
         <?php
 
@@ -108,8 +108,9 @@
 
     ```
 
-- 15- Déplacer le fichier ```auth.php``` dans le repertoire suivant ```routes/web/```
+- 15- Déplacer le fichier ``` auth.php ``` dans le repertoire suivant ``` routes/web/ ```
 - 16- Vider le contenu du fichier web.php par :
+
     ``` 
         <?php
 
@@ -125,6 +126,7 @@
         foreach(File::allFiles(__DIR__.'/web') as $route_file){
             require $route_file->getPathname();
         }
+        
     ```
 - 15- Actualiser les informations de l'application
     ```
@@ -146,6 +148,7 @@ Visible sur 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)
 | **Routes**    | `routes/sdisauth/web/` |
 | **Config**    | `config/sdisauth.php` |
 | **Migrations** | `database/migrations/` |
+| **Models** | `app/Models/` |
 | **Requests**  | `app/Http/Requests/Sdisauth/` |
 
 
@@ -161,7 +164,7 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
     ```
         
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-        php artisan vendor:publish --provider="Sdisauth\AuthServiceProvider"
+        php artisan vendor:publish --provider="Sdisauth\AuthServiceProvider" --force
 
     ```
 - 2- Créer un fichier authentificationRoutes.php dans ```routes/web/..```
@@ -298,5 +301,5 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
 
 ## Auteur
 
-Développé par [FPM-SDIS](https://github.com/fpmsdis)  
+Développé par [FPM-SDIS](https://github.com/fpmsdis)
 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Sdisauth;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\User;
+use App\Models\{User, Parametre};
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
