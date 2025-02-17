@@ -30,9 +30,10 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
+            __DIR__.'/database/migrations' => database_path('migrations'),
             __DIR__.'/database/seeders' => database_path('seeders'),
             __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
-            __DIR__.'/routes/web.php' => base_path('routes/web.php'), // Uniquement le fichier web.php
+            __DIR__.'/routes/web' => base_path('routes/web'), // Uniquement le fichier web.php
             __DIR__.'/Models' => app_path('Models'),
             __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
             __DIR__.'/Http/Requests' => app_path('Http/Requests/Sdisauth'),
