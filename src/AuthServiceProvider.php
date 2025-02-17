@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
     protected function publishWithOverwrite(array $paths)
     {
         foreach ($paths as $from => $to) {
-            $this->deleteExisting($to);
+            $this->deleteExisting($from, $to);
             $this->publishes([$from => $to], 'sdisauth', true);
         }
     }
