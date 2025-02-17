@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use Spatie\Permission\Models\Permission;
-use App\Http\Requests\ModificationPermissionRequest;
-use App\Http\Requests\{RoleRequest, PermissionRequest}; // Ajouter par OUATTARA
+use App\Http\Requests\Sdisauth\ModificationPermissionRequest;
+use App\Http\Requests\Sdisauth\{RoleRequest, PermissionRequest}; // Ajouter par OUATTARA
 use Str; // Ajouter par OUATTARA le 11/02/2025
 
 class UserRolePermissionController extends Controller

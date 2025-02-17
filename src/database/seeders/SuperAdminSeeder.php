@@ -38,7 +38,7 @@ class SuperAdminSeeder extends Seeder
         $admin = User::firstOrCreate(
             ['email' => 'admin@fpmnet.ci'],
             [
-                'name' => 'Super Admin',
+                'name' => 'Admin',
                 'password' => Hash::make('password'),
             ]
         );
