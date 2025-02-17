@@ -19,45 +19,25 @@ class AuthServiceProvider extends ServiceProvider
     {   
         $this->registerRoutes();
 
-        $this->publishWithOverwrite([
+        // $this->publishWithOverwrite([
+        //     __DIR__.'/resources/views' => resource_path('views'),
+        //     __DIR__.'/database/seeders' => database_path('seeders'),
+        //     __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
+        //     // __DIR__.'/public' => public_path(),
+        //     __DIR__.'/routes/web' => base_path('routes/web'),
+        //     __DIR__.'/Models' => app_path('Models'),
+        // ]);
+
+        $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
             __DIR__.'/database/seeders' => database_path('seeders'),
             __DIR__.'/config/sdisauth.php' => config_path('sdisauth.php'),
-            // __DIR__.'/public' => public_path(),
-            __DIR__.'/routes/web' => base_path('routes/web'),
+            __DIR__.'/routes/web.php' => base_path('routes/web.php'), // Uniquement le fichier web.php
             __DIR__.'/Models' => app_path('Models'),
-        ]);
-    }
-
-    /**
-     * Publie les fichiers en écrasant les existants.
-     */
-    protected function publishWithOverwrite(array $paths)
-    {
-        foreach ($paths as $from => $to) {
-            $this->deleteExisting($from, $to);
-            $this->publishes([$from => $to], 'sdisauth', true);
-        }
-    }
-
-    /**
-     * Supprime les fichiers et dossiers existants avant la publication.
-     */
-    protected function deleteExisting($from, $to)
-    {
-        if (File::exists($to)) {
-            if (File::isDirectory($to)) {
-                if ($to === resource_path('views')) {
-                    foreach (File::allFiles($to) as $file) {
-                        if ($file->getFilename() !== 'welcome.blade.php') {
-                            File::delete($file->getPathname());
-                        }
-                    }
-                } else {
-                    File::deleteDirectory($to);
-                }
-            }
-        }
+            __DIR__.'/Http/Controllers' => app_path('Http/Controllers/Sdisauth'),
+            __DIR__.'/Http/Requests' => app_path('Http/Requests/Sdisauth'),
+            __DIR__.'/public' => public_path(),
+        ], 'sdisauth');
     }
 
     protected function registerRoutes()
