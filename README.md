@@ -61,12 +61,6 @@ Visible sur 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)
 | **Models** | `app/Models/` |
 | **Requests**  | `app/Http/Requests/Sdisauth/` |
 
-## Dépendance du package
-
-- `php` : `<=^8.2`
-- `laravel/breeze` : `^2.2`
-- `spatie/laravel-permission` : `^6.9`
-
 
 
 ## **Deuxième Installation**
