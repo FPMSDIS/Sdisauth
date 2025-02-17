@@ -46,6 +46,10 @@
         php artisan optimize:clear
     ```
 - 10- Vérifier si la route est disponible dans votre projet avec la commande suivante : ```php artisan route:list```
+- 11- Vous pouvez personnaliser le nom de l'application en ajoutant cette ligne dans le fichier ``` .env ``` de son projet :
+    ```
+        SDISAUTH_APP_NAME="SDIS AUTH"
+    ```
 
 ## ✅ Résumé du comportement après publication
 Visible sur 👤 GitHub: [@fpmsdis](https://github.com/fpmsdis)
@@ -129,6 +133,12 @@ Une commande qui fait tout le travail pour vous, l'installation et la publicatio
         ```
             <link rel="stylesheet" href="{{ asset('vendor/sdisauth/css/style.css') }}">
         ```
+- ✅ Application du nom de notre package dans votre projet
+        ``` 
+            config('sdisauth.app_name')
+        ```
+
+
 ## Accès à l'application (Compte crée) Admin
 
 ### Login : **admin@fpmnet.ci**

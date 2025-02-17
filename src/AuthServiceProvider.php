@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {   
         $this->registerRoutes();
-
+        $appName = config('sdisauth.app_name');
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views'),
             __DIR__.'/database/migrations' => database_path('migrations'),
@@ -31,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/public' => public_path(),
         ], 'sdisauth');
         $this->publishRoutes();
+        info("Le package Sdisauth est installé dans l'application: " . $appName);
     }
 
     protected function publishRoutes()

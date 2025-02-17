@@ -2,6 +2,6 @@
 
 return [
     'layout' => 'layouts.base',
-    'title' => "Nom de l'Application",
+    'app_name' => env('SDISAUTH_APP_NAME', config('app.name')),
     'views_published' => false,
 ];
